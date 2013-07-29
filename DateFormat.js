@@ -61,9 +61,15 @@
             return new Date(strDate);
         },
 
-        pad: function(val, len) {
+        pad: function(val, len, cut) {
             if (len < 1) return '';
-            
+            if (getType(cut, 'undefined')) cut = true;
+            val = '' + val;
+            for (var i = 0 ; i < len; i++) {
+                val = '0' + val;
+            }
+            i = val.length - len;
+            return val.substring(cut ? i : i > 0 ? len : i);
         },
 
         format: function(date, format) {
