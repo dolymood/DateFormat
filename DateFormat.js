@@ -262,7 +262,8 @@
             parts['zzz']   = pad(temp, 3);
 
             return format.replace(rrg, function(match, $1) {
-                return parts[$1];
+                var _ = parts[$1];
+                return _ == undefined ? $1 : _
             });
         },
 
