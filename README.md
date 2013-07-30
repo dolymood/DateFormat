@@ -19,7 +19,7 @@ DF.format(d, 'yyyy年MMM%dd日 HH:mm:ss.zzz'); // 2013年7月30日 16:59:17.846
 DF.parseFormatted('2013年7月29日 2:50:06.570pm', 'yyyy年M月dd日 h:mm:ss.zzz%a'); // Mon Jul 29 2013 14:50:06 GMT+0800 (中国标准时间)
 DF.parseFormatted('2013年7月29日 2:50:06.570am', 'yyyy年M月dd日 h:mm:ss.zzz%ap'); // Mon Jul 29 2013 02:50:06 GMT+0800 (中国标准时间)
 </pre>
-<p>此外还有：<i>mix type now getQR parse pad convertTo12Hour convertTo24Hour parseToInt</i>等方法，具体可参见源代码</p>
+<p>此外还有：<i>prettyDate mix type now getQR parse pad convertTo12Hour convertTo24Hour parseToInt</i>等方法，具体可参见源代码</p>
 <h3>2、DateFormat原型方法</h3>
 <pre>
 var df = new DF(d);

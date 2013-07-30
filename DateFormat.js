@@ -145,6 +145,15 @@
          */
         getQR: function() {
             return DateFormat.getQR(this.date);
+        },
+
+        /**
+         * 转换日期
+         * @param date {Date|String} 日期
+         * @return {String} 转换后字符串
+         */
+        prettyDate: function(lang) {
+            return DateFormat.prettyDate(this.date, lang);
         }
 
     });
