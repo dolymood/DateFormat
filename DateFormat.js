@@ -379,10 +379,10 @@
         },
 
         /**
-         * 将日期格式化为指定格式字符串
+         * 转换日期
          * @param date {Date|String} 日期
          * @param lang {String|Undefined} 语言 只有两个值 GB | US
-         * @return {String} 格式化后日期字符串
+         * @return {String} 转换后字符串
          */
         prettyDate: function(date, lang) {
             var ret, now, diff, getTime;
@@ -396,23 +396,31 @@
                 if (diff < 1) {
                     ret = lang ? '刚刚' : 'just now';
                 } else if (diff < 60) {
-                    ret = lang ? (diff + '秒以前') : (diff + 's ago');
+                    ret = lang ? (diff + '秒以前') : ((diff ===1 ? (diff + ' second') : (diff + ' seconds')) + ' ago');
                 } else if (diff < 3600) {
                     diff = diff/60;
-                    ret = lang ? (diff + '分钟以前') : (diff + 'm ago');
+                    ret = lang ? (diff + '分钟以前') : ((diff ===1 ? (diff + ' minute') : (diff + ' minutes')) + ' ago');
                 } else {
                     diff = now.getDate() - date.getDate();
                     getTime = DateFormat.getTime;
                     if (diff === 0) {
-                        ret = '今天 ' + getTime(date);
+                        ret = (lang ? '今天 ' : 'Today ') + getTime(date);
                     } else if (diff === 1) {
-                        ret = '昨天 ' + getTime(date);
+                        ret = (lang ? '昨天 ' : 'Yesterday ') + getTime(date);
                     } else {
                         diff = now.getFullYear() - date.getFullYear();
                         if (diff === 0) {
-                            ret = (date.getMonth() + 1) + '月' + date.getDate() + '日 ' + getTime(date);
+                            if (lang) {
+                                ret = (date.getMonth() + 1) + '月' + date.getDate() + '日 ' + getTime(date);
+                            } else {
+                                ret = (date.getMonth() + 1) + '/' + date.getDate() + '' + getTime(date);
+                            }
                         } else {
-                            ret = date.getFullYear() + '年' + (date.getMonth() + 1) + '月' + date.getDate() + '日 ' + getTime(date);
+                            if (lang) {
+                                ret = date.getFullYear() + '年' + (date.getMonth() + 1) + '月' + date.getDate() + '日 ' + getTime(date);
+                            } else {
+                                ret = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' ' + getTime(date);
+                            }
                         }
                     }
                 }
@@ -422,6 +430,11 @@
             return ret;
         },
 
+        /**
+         * 得到日期的时:分
+         * @param time {Date} 日期
+         * @return {String} 03:10--时:分
+         */
         getTime: function(time) {
             return DateFormat.pad(time.getHours(), 2) + ':' + DateFormat.pad(time.getMinutes(), 2);
         }
