@@ -54,7 +54,7 @@
 		var d = new Date();
 		tmp += ("<li>DF.format(d, 'dd.MM.yyyy. HH:mm:ss.zzz'); // " + DF.format(d, 'dd.MM.yyyy. HH:mm:ss.zzz') + "</li>");
 		tmp += ("<li>DF.format(d, 'yyyy年M月dd日 HH:mm:ss.zzz'); // " + DF.format(d, 'yyyy年M月dd日 HH:mm:ss.zzz') + "</li>");
-		tmp += ("<li>DF.format(d, 'yyyy年MM月dd日 HH:mm:ss.zzz'); // " + DF.format(d, 'yyyy年MM月dd日 HH:mm:ss.zzz') + "</li>");
+		tmp += ("<li>DF.format(d, 'yyyy年MM月dd日 dddd HH:mm:ss.zzz'); // " + DF.format(d, 'yyyy年MM月dd日 dddd HH:mm:ss.zzz') + "</li>");
 		tmp += ("<li>DF.format(d, 'yyyy年MMM%dd日 HH:mm:ss.zzz'); // " + DF.format(d, 'yyyy年MMM%dd日 HH:mm:ss.zzz') + "</li>");
 		tmp += ("<li>DF.parseFormatted('2013年7月29日 2:50:06.570pm', 'yyyy年M月dd日 h:mm:ss.zzz%a'); // " + DF.parseFormatted('2013年7月29日 2:50:06.570pm', 'yyyy年M月dd日 h:mm:ss.zzz%a') + "</li>");
 		tmp += ("<li>DF.parseFormatted('2013年7月29日 2:50:06.570am', 'yyyy年M月dd日 h:mm:ss.zzz%ap'); // " + DF.parseFormatted('2013年7月29日 2:50:06.570am', 'yyyy年M月dd日 h:mm:ss.zzz%ap') + "</li>");
@@ -63,7 +63,7 @@
 		var df = new DF(d);
 		tmp = '';
 		tmp += ("<li>df.toFormattedString('dd.MM.yyyy. HH:mm:ss.zzz'); // " + df.toFormattedString('dd.MM.yyyy. HH:mm:ss.zzz') + "</li>");
-		tmp += ("<li>df.toFormattedString('dd.MM.yyyy. HH:mm:ss.zzz'); // " + df.toFormattedString('dd.MM.yyyy. HH:mm:ss.zzz') + "</li>");
+		tmp += ("<li>df.toFormattedString('dd.MM.yyyy. HH:mm:ss.z'); // " + df.toFormattedString('dd.MM.yyyy. HH:mm:ss.z') + "</li>");
 		tmp += ("<li>df.toFormattedString('yyyy年M月dd日 HH:mm:ss.zzz'); // " + df.toFormattedString('yyyy年M月dd日 HH:mm:ss.zzz') + "</li>");
 		tmp += ("<li>df.toFormattedString('yyyy年MM月dd日 HH:mm:ss.zzz'); // " + df.toFormattedString('yyyy年MM月dd日 HH:mm:ss.zzz') + "</li>");
 		tmp += ("<li>df.toFormattedString('yyyy年MMM%dd日 HH:mm:ss.zzz'); // " + df.toFormattedString('yyyy年MMM%dd日 HH:mm:ss.zzz') + "</li>");

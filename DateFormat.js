@@ -12,23 +12,51 @@
 (function(win) {
 
     var Dat = win.Date,
-        DatP = Dat.prototype,
         DATAINFO = {
             GB: {
-                dayNames:        ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
-                shortDayNames:   ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
-                monthNames:      ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-                shortMonthNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+                dayNames        : ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+                shortDayNames   : ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+                monthNames      : ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                shortMonthNames : ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
             },
             US: {
-                dayNames:        ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-                shortDayNames:   ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                monthNames:      ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                shortMonthNames: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                dayNames        : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+                shortDayNames   : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                monthNames      : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                shortMonthNames : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
             }
         },
         toStr = DATAINFO.toString,
-        rrg = /(?:\b|%)([dMyHhaAmsz]+|ap|AP)(?:\b|%)/g;
+        rrg = /(?:\b|%)([dMyHhaAmsz]+|ap|AP)(?:\b|%)/g,
+        PARTS = {
+            d    : '([0-9][0-9]?)',
+            dd   : '([0-9][0-9])',
+            //ddd  : '',
+            //dddd : '',
+            M    : '([0-9][0-9]?)',
+            MM   : '([0-9][0-9])',
+            //MMM  : '',
+            //MMMM : '',
+            yyyy : '([0-9][0-9][0-9][0-9])',
+            yyy  : '([0-9][0-9])[y]',
+            yy   : '([0-9][0-9])',
+            H    : '([0-9][0-9]?)',
+            hh   : '([0-9][0-9])',
+            h    : '([0-9][0-9]?)',
+            HH   : '([0-9][0-9])',
+            m    : '([0-9][0-9]?)',
+            mm   : '([0-9][0-9])',
+            s    : '([0-9][0-9]?)',
+            ss   : '([0-9][0-9])',
+            z    : '([0-9][0-9]?[0-9]?)',
+            zz   : '([0-9][0-9]?[0-9]?)[z]',
+            zzz  : '([0-9][0-9][0-9])',
+            ap   : '([ap][m])',
+            a    : '([ap][m])',
+            AP   : '([AP][M])',
+            A    : '([AP][M])',
+            '%'  : '',
+        };
 
     if (!Dat.now) {
         Dat.now = function() {
@@ -120,15 +148,6 @@
         }
 
     });
-    
-    // 扩展 DateFormat 原型 使其具有Date的一切原型方法
-    for (var key in DatP) {
-        if (DatP.hasOwnProperty(key)) {
-            DateFormat.prototype[key] = function() {
-                return this.date[key].apply(this.date, arguments);
-            };
-        }
-    }
 
     // 静态方法
     mix(DateFormat, {
@@ -274,73 +293,137 @@
          * @return {Date} 日期
          */
         parseFormatted: function(strDate, format) {
-            var lang = (lang ? (lang == 'GB' || lang == 'US') ? lang : 'GB' : 'GB'),
-                i18n = DATAINFO[lang],
-                parseToInt = DateFormat.parseToInt,
+            var parseToInt = DateFormat.parseToInt,
                 convertTo24Hour = DateFormat.convertTo24Hour,
-                i, ret;
+                parts = PARTS,
+                regex = '', i = 0, outputs = [''],
+                ret, token, matches, len, tmp;
             ret = DateFormat.parse(strDate);
             if (ret) return ret;
             ret = new Date(2000, 0, 1);
-            i = 0;
-            format.replace(rrg, function(match, $1, index, _, tmp, temp) {
-                if ($1 === 'a') $1 = 'ap';
-                if ($1 === 'A') $1 = 'AP';
-                temp = strDate.slice(index + i, index + i + $1.length);
-                tmp = parseToInt(temp);
-                i += ($1.length - match.length);
-                switch($1)
-                {
-                    case 'yyyy':
-                    case 'yyy':
-                        ret.setYear(tmp);
-                        break;
-
-                    case 'yy':
-                        ret.setYear(2000 + tmp);
-                        break;
-
-                    case 'MM':
-                    case 'M':
-                        ret.setMonth(tmp - 1);
-                        break;
-
-                    case 'dd':
-                    case 'd':
-                        ret.setDate(tmp);
-                        break;
-
-                    case 'hh':
-                    case 'h':
-                    case 'HH':
-                    case 'H':
-                        ret.setHours(tmp);
-                        break;
-
-                    case 'mm':
-                    case 'm':
-                        ret.setMinutes(tmp);
-                        break;
-
-                    case 'ss':
-                    case 's':
-                        ret.setSeconds(tmp);
-                        break;
-
-                    case 'zzz':
-                    case 'zz':
-                    case 'z':
-                        ret.setMilliseconds(tmp);
-                        break;
-
-                    case 'AP':
-                    case 'ap':
-                        ret.setHours(convertTo24Hour(ret.getHours(), temp));
-                        break;
+            while (i < format.length) {
+                token = format.charAt(i);
+                while((i + 1 < format.length) && parts[token + format.charAt(i + 1)] !== undefined) {
+                    token += format.charAt(++i);
                 }
-                return $1;
-            });
+                if ((tmp = parts[token]) !== undefined) {
+                    if (tmp !== '') {
+                        regex += parts[token];
+                        outputs.push(token);
+                    }
+                } else {
+                    regex += token;
+                }
+                i++;
+            }
+            regex = new RegExp(regex);
+            matches = strDate.match(regex);
+            len = outputs.length;
+            if (!matches || matches.length !== len) return null;
+            for (i = 0; i < len; i++) {
+                if ((token = outputs[i]) !== '') {
+                    tmp = parseToInt(matches[i]);
+                    switch (token) {
+                        case 'yyyy':
+                        case 'yyy':
+                            ret.setYear(tmp);
+                            break;
+
+                        case 'yy':
+                            ret.setYear(2000 + tmp);
+                            break;
+
+                        case 'MM':
+                        case 'M':
+                            ret.setMonth(tmp - 1);
+                            break;
+
+                        case 'dd':
+                        case 'd':
+                            ret.setDate(tmp);
+                            break;
+
+                        case 'hh':
+                        case 'h':
+                        case 'HH':
+                        case 'H':
+                            ret.setHours(tmp);
+                            break;
+
+                        case 'mm':
+                        case 'm':
+                            ret.setMinutes(tmp);
+                            break;
+
+                        case 'ss':
+                        case 's':
+                            ret.setSeconds(tmp);
+                            break;
+
+                        case 'zzz':
+                        case 'zz':
+                        case 'z':
+                            ret.setMilliseconds(tmp);
+                            break;
+
+                        case 'AP':
+                        case 'A':
+                        case 'ap':
+                        case 'a':
+                            ret.setHours(convertTo24Hour(ret.getHours(), matches[i]));
+                            break;
+                    }
+                }
+            }
             return ret;
+        },
+
+        /**
+         * 将日期格式化为指定格式字符串
+         * @param date {Date|String} 日期
+         * @param lang {String|Undefined} 语言 只有两个值 GB | US
+         * @return {String} 格式化后日期字符串
+         */
+        prettyDate: function(date, lang) {
+            var ret, now, diff, getTime;
+            date = DateFormat.parse(date);
+            lang = lang === 'GB';
+            
+            if (date) {
+                now = DateFormat.parse();
+                diff = DateFormat.parseToInt((now - date)/1000);
+
+                if (diff < 1) {
+                    ret = lang ? '刚刚' : 'just now';
+                } else if (diff < 60) {
+                    ret = lang ? (diff + '秒以前') : (diff + 's ago');
+                } else if (diff < 3600) {
+                    diff = diff/60;
+                    ret = lang ? (diff + '分钟以前') : (diff + 'm ago');
+                } else {
+                    diff = now.getDate() - date.getDate();
+                    getTime = DateFormat.getTime;
+                    if (diff === 0) {
+                        ret = '今天 ' + getTime(date);
+                    } else if (diff === 1) {
+                        ret = '昨天 ' + getTime(date);
+                    } else {
+                        diff = now.getFullYear() - date.getFullYear();
+                        if (diff === 0) {
+                            ret = (date.getMonth() + 1) + '月' + date.getDate() + '日 ' + getTime(date);
+                        } else {
+                            ret = date.getFullYear() + '年' + (date.getMonth() + 1) + '月' + date.getDate() + '日 ' + getTime(date);
+                        }
+                    }
+                }
+            } else {
+                ret = '';
+            }
+            return ret;
+        },
+
+        getTime: function(time) {
+            return DateFormat.pad(time.getHours(), 2) + ':' + DateFormat.pad(time.getMinutes(), 2);
         }
 
     });
