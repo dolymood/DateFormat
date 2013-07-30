@@ -31,6 +31,6 @@ df.toFormattedString('yyyy年MMM%dd日 HH:mm:ss.zzz'); // 2013年7月30日 16:59
 df.fromFormattedString('2013年7月29日 2:50:06.570pm', 'yyyy年M月dd日 h:mm:ss.zzz%a'); // Mon Jul 29 2013 14:50:06 GMT+0800 (中国标准时间)
 df.fromFormattedString('2013年7月29日 2:50:06.570am', 'yyyy年M月dd日 h:mm:ss.zzz%ap'); // Mon Jul 29 2013 02:50:06 GMT+0800 (中国标准时间)
 </pre>
-<p>此外还有：<i>setdate getQR</i>等方法，具体可参见源代码</p>
+<p>此外还有：<i>prettyDate setdate getQR</i>等方法，具体可参见源代码</p>
 
 
