@@ -5,15 +5,73 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>日期格式化</title>
+<title>日期格式化 DataFormat</title>
 <script type="text/javascript" src="./DateFormat.js"></script>
 <style>
-	
+	body {
+		font: 13px Helvetica, arial, freesans, clean, sans-serif;
+        line-height: 1.4;
+	}
+	.ct {
+		margin: 10px auto;
+		border: 1px solid #999;
+		padding: 5px 10px;
+		-webkit-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.5);
+		-moz-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.5);
+		-o-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.5);
+		-ms-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.5);
+		box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.5);
+	}
+	ul, li {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	li {
+		margin: 10px;
+	}
 </style>
 </head>
 <body>
+	<h2>日期格式化 DataFormat 示例</h2>
+	<h3>1、DataFormat静态方法</h3>
+	<div class="ct">
+		<ul>
+			
+		</ul>
+	</div>
+	<h3>2、DataFormat原型方法</h3>
+	<div class="ct">
+		<ul>
+			
+		</ul>
+	</div>
 	<script type="text/javascript">
-	//DateFormat.parse(2013,4,6);
+	(function(win, document) {
+		var uls = document.getElementsByTagName('ul');
+		var tmp = '';
+		var DF = win.DF;
+		var d = new Date();
+		tmp += ("<li>DF.format(d, 'dd.MM.yyyy. HH:mm:ss.zzz'); // " + DF.format(d, 'dd.MM.yyyy. HH:mm:ss.zzz') + "</li>");
+		tmp += ("<li>DF.format(d, 'yyyy年M月dd日 HH:mm:ss.zzz'); // " + DF.format(d, 'yyyy年M月dd日 HH:mm:ss.zzz') + "</li>");
+		tmp += ("<li>DF.format(d, 'yyyy年MM月dd日 HH:mm:ss.zzz'); // " + DF.format(d, 'yyyy年MM月dd日 HH:mm:ss.zzz') + "</li>");
+		tmp += ("<li>DF.format(d, 'yyyy年MMM%dd日 HH:mm:ss.zzz'); // " + DF.format(d, 'yyyy年MMM%dd日 HH:mm:ss.zzz') + "</li>");
+		tmp += ("<li>DF.parseFormatted('2013年7月29日 2:50:06.570pm', 'yyyy年M月dd日 h:mm:ss.zzz%a'); // " + DF.parseFormatted('2013年7月29日 2:50:06.570pm', 'yyyy年M月dd日 h:mm:ss.zzz%a') + "</li>");
+		tmp += ("<li>DF.parseFormatted('2013年7月29日 2:50:06.570am', 'yyyy年M月dd日 h:mm:ss.zzz%ap'); // " + DF.parseFormatted('2013年7月29日 2:50:06.570am', 'yyyy年M月dd日 h:mm:ss.zzz%ap') + "</li>");
+		uls[0].innerHTML = tmp;
+
+		var df = new DF(d);
+		tmp = '';
+		tmp += ("<li>df.toFormattedString('dd.MM.yyyy. HH:mm:ss.zzz'); // " + df.toFormattedString('dd.MM.yyyy. HH:mm:ss.zzz') + "</li>");
+		tmp += ("<li>df.toFormattedString('dd.MM.yyyy. HH:mm:ss.zzz'); // " + df.toFormattedString('dd.MM.yyyy. HH:mm:ss.zzz') + "</li>");
+		tmp += ("<li>df.toFormattedString('yyyy年M月dd日 HH:mm:ss.zzz'); // " + df.toFormattedString('yyyy年M月dd日 HH:mm:ss.zzz') + "</li>");
+		tmp += ("<li>df.toFormattedString('yyyy年MM月dd日 HH:mm:ss.zzz'); // " + df.toFormattedString('yyyy年MM月dd日 HH:mm:ss.zzz') + "</li>");
+		tmp += ("<li>df.toFormattedString('yyyy年MMM%dd日 HH:mm:ss.zzz'); // " + df.toFormattedString('yyyy年MMM%dd日 HH:mm:ss.zzz') + "</li>");
+		tmp += ("<li>df.fromFormattedString('2013年7月29日 2:50:06.570pm', 'yyyy年M月dd日 h:mm:ss.zzz%a'); // " + df.fromFormattedString('2013年7月29日 2:50:06.570pm', 'yyyy年M月dd日 h:mm:ss.zzz%a') + "</li>");
+		tmp += ("<li>df.fromFormattedString('2013年7月29日 2:50:06.570am', 'yyyy年M月dd日 h:mm:ss.zzz%ap'); // " + df.fromFormattedString('2013年7月29日 2:50:06.570am', 'yyyy年M月dd日 h:mm:ss.zzz%ap') + "</li>");
+		uls[1].innerHTML = tmp;
+
+	})(window, document);
 	</script>
 </body>
 </html>
