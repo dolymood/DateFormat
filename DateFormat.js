@@ -63,11 +63,6 @@
             return new Dat().getTime();
         };
     }
-    if (!String.prototype.trim) {
-        String.prototype.trim = function() {
-            return this.replace(/^[\s\xA0]+/, '').replace(/[\s\xA0]+$/, '')
-        };
-    }
 
     function getType(obj, typeVal) {
         var ret = '';
