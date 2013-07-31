@@ -422,13 +422,13 @@
                             if (lang) {
                                 ret = (date.getMonth() + 1) + '月' + date.getDate() + '日 ' + getTime(date);
                             } else {
-                                ret = (date.getMonth() + 1) + '/' + date.getDate() + '' + getTime(date);
+                                ret = date.getDate() + '/' + (date.getMonth() + 1) + ' ' + getTime(date);
                             }
                         } else {
                             if (lang) {
                                 ret = date.getFullYear() + '年' + (date.getMonth() + 1) + '月' + date.getDate() + '日 ' + getTime(date);
                             } else {
-                                ret = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' ' + getTime(date);
+                                ret = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + getTime(date);
                             }
                         }
                     }
