@@ -1,7 +1,7 @@
 DateFormat
 ==========
 
-<h2>Date Format是一个封装日期格式化的库.</h2>
+<h2>Date Format是一个日期格式化的库.</h2>
 <p>提供的全局的接口DateFormat(DF).</p>
 <h2>日期格式化 DateFormat 使用：</h2>
 <p>格式化依据的字符串关键字 可以是一下字符组合：</p>
