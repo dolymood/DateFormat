@@ -2,7 +2,7 @@ DateFormat
 ==========
 
 <h2>Date Format是一个日期格式化的库.</h2>
-<p>提供的全局的接口DateFormat(DF).</p>
+<p>提供的全局的接口DateFormat(DF).支持中文、英文</p>
 <h2>日期格式化 DateFormat 使用：</h2>
 <p>格式化依据的字符串关键字 可以是一下字符组合：</p>
 <p>y M d H h a ap A AP m s z %</p>
