@@ -243,8 +243,7 @@
          */
         format: function(date, format, lang) {
             var parts = {},
-                lang = (lang ? (lang == 'GB' || lang == 'US') ? lang : 'GB' : 'GB'),
-                i18n = DATAINFO[lang],
+                i18n = DATAINFO[lang ? lang : 'GB'] || DATAINFO['GB'],
                 isAmPm = (format.indexOf('a') !== -1) || (format.indexOf('A') !== -1),
                 pad = DateFormat.pad,
                 convertTo12Hour = DateFormat.convertTo12Hour,
