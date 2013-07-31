@@ -407,7 +407,7 @@
                 } else if (diff < 60) {
                     ret = lang ? (diff + '秒以前') : ((diff ===1 ? (diff + ' second') : (diff + ' seconds')) + ' ago');
                 } else if (diff < 3600) {
-                    diff = diff/60;
+                    diff = DateFormat.parseToInt(diff/60);
                     ret = lang ? (diff + '分钟以前') : ((diff ===1 ? (diff + ' minute') : (diff + ' minutes')) + ' ago');
                 } else {
                     diff = now.getDate() - date.getDate();
