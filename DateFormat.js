@@ -9,7 +9,7 @@
  * Dual licensed under the MIT licenses.
  * ----------------------------------------------------------------------------
  */
-(function(win) {
+;(function(win) {
 
     var Dat = win.Date,
         DATAINFO = {
