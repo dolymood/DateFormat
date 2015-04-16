@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Dateformat by dolymood</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Dateformat</h1>
+      <h2 class="project-tagline">Date Format--javascript js</h2>
+      <a href="https://github.com/dolymood/DateFormat" class="btn">View on GitHub</a>
+      <a href="https://github.com/dolymood/DateFormat/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/dolymood/DateFormat/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="dateformat" class="anchor" href="#dateformat" aria-hidden="true"><span class="octicon octicon-link"></span></a>DateFormat</h1>
+
+<h2>
+<a id="date-format是一个日期格式化的库" class="anchor" href="#date-format%E6%98%AF%E4%B8%80%E4%B8%AA%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%9A%84%E5%BA%93" aria-hidden="true"><span class="octicon octicon-link"></span></a>Date Format是一个日期格式化的库.</h2>
+
+<p>提供的全局的接口DateFormat(DF).支持中文、英文</p>
+
+<h3>
+<a id="日期格式化-dateformat-使用" class="anchor" href="#%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%8C%96-dateformat-%E4%BD%BF%E7%94%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>日期格式化 DateFormat 使用：</h3>
+
+<p>格式化依据的字符串关键字 可以是一下字符组合：</p>
+
+<p>y M d H h a ap A AP m s z %</p>
+
+<p>例如：</p>
+
+<p>'MM dd yyyy dddd hh:mm:ss'</p>
+
+<p>说明：<em>y--年、M--月、d|dd--日、ddd|dddd--星期、H--24小时制小时数、h--12小时制小时数、a|ap--am pm、A|AP--AM PM、m--分钟、s--秒、z--毫秒、%--当一些关键字连在一起的时候需要区分的字符</em></p>
+
+<h4>
+<a id="1dataformat静态方法" class="anchor" href="#1dataformat%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>1、DataFormat静态方法</h4>
+
+<div class="highlight highlight-js"><pre>DF.format(d, <span class="pl-s"><span class="pl-pds">'</span>dd.MM.yyyy. HH:mm:ss.zzz<span class="pl-pds">'</span></span>); <span class="pl-c">// 31.07.2013. 10:48:19.751</span>
+DF.format(d, <span class="pl-s"><span class="pl-pds">'</span>yyyy年M月dd日 HH:mm:ss.zzz<span class="pl-pds">'</span></span>); <span class="pl-c">// 2013年7月31日 10:48:19.751</span>
+DF.format(d, <span class="pl-s"><span class="pl-pds">'</span>yyyy年MM月dd日 dddd HH:mm:ss.zzz<span class="pl-pds">'</span></span>); <span class="pl-c">// 2013年07月31日 星期三 10:48:19.751</span>
+DF.format(d, <span class="pl-s"><span class="pl-pds">'</span>yyyy年MMM%dd日 HH:mm:ss.zzz<span class="pl-pds">'</span></span>); <span class="pl-c">// 2013年7月31日 10:48:19.751</span>
+DF.parseFormatted(<span class="pl-s"><span class="pl-pds">'</span>2013年7月29日 2:50:06.570pm<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>yyyy年M月dd日 h:mm:ss.zzz%a<span class="pl-pds">'</span></span>); <span class="pl-c">// Mon Jul 29 2013 14:50:06 GMT+0800 (中国标准时间)</span>
+DF.parseFormatted(<span class="pl-s"><span class="pl-pds">'</span>2013年7月29日 2:50:06.570am<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>yyyy年M月dd日 h:mm:ss.zzz%ap<span class="pl-pds">'</span></span>); <span class="pl-c">// Mon Jul 29 2013 02:50:06 GMT+0800 (中国标准时间)</span>
+DF.prettyDate(d, <span class="pl-s"><span class="pl-pds">'</span>GB<span class="pl-pds">'</span></span>); <span class="pl-c">// 刚刚</span>
+DF.prettyDate(d, <span class="pl-s"><span class="pl-pds">'</span>US<span class="pl-pds">'</span></span>); <span class="pl-c">// just now</span>
+DF.prettyDate(dd, <span class="pl-s"><span class="pl-pds">'</span>GB<span class="pl-pds">'</span></span>); <span class="pl-c">// 1秒以前</span>
+DF.prettyDate(dd, <span class="pl-s"><span class="pl-pds">'</span>US<span class="pl-pds">'</span></span>); <span class="pl-c">// 1 second ago</span>
+DF.prettyDate(dd, <span class="pl-s"><span class="pl-pds">'</span>GB<span class="pl-pds">'</span></span>); <span class="pl-c">// 6秒以前</span>
+DF.prettyDate(dd, <span class="pl-s"><span class="pl-pds">'</span>US<span class="pl-pds">'</span></span>); <span class="pl-c">// 6 seconds ago</span>
+DF.prettyDate(dd, <span class="pl-s"><span class="pl-pds">'</span>GB<span class="pl-pds">'</span></span>); <span class="pl-c">// 1分钟以前</span>
+DF.prettyDate(dd, <span class="pl-s"><span class="pl-pds">'</span>US<span class="pl-pds">'</span></span>); <span class="pl-c">// 1 minute ago</span>
+DF.prettyDate(dd, <span class="pl-s"><span class="pl-pds">'</span>GB<span class="pl-pds">'</span></span>); <span class="pl-c">// 31分钟以前</span>
+DF.prettyDate(dd, <span class="pl-s"><span class="pl-pds">'</span>US<span class="pl-pds">'</span></span>); <span class="pl-c">// 31 minutes ago</span>
+DF.prettyDate(dd, <span class="pl-s"><span class="pl-pds">'</span>GB<span class="pl-pds">'</span></span>); <span class="pl-c">// 今天 09:47</span>
+DF.prettyDate(dd, <span class="pl-s"><span class="pl-pds">'</span>US<span class="pl-pds">'</span></span>); <span class="pl-c">// Today 09:47</span>
+DF.prettyDate(dd, <span class="pl-s"><span class="pl-pds">'</span>GB<span class="pl-pds">'</span></span>); <span class="pl-c">// 今天 06:47</span>
+DF.prettyDate(dd, <span class="pl-s"><span class="pl-pds">'</span>US<span class="pl-pds">'</span></span>); <span class="pl-c">// Today 06:47</span>
+DF.prettyDate(dd, <span class="pl-s"><span class="pl-pds">'</span>GB<span class="pl-pds">'</span></span>); <span class="pl-c">// 昨天 09:47</span>
+DF.prettyDate(dd, <span class="pl-s"><span class="pl-pds">'</span>US<span class="pl-pds">'</span></span>); <span class="pl-c">// Yesterday 09:47</span>
+DF.prettyDate(dd, <span class="pl-s"><span class="pl-pds">'</span>GB<span class="pl-pds">'</span></span>); <span class="pl-c">// 7月28日 09:47</span>
+DF.prettyDate(dd, <span class="pl-s"><span class="pl-pds">'</span>US<span class="pl-pds">'</span></span>); <span class="pl-c">// 28/7 09:47</span>
+DF.prettyDate(dd, <span class="pl-s"><span class="pl-pds">'</span>GB<span class="pl-pds">'</span></span>); <span class="pl-c">// 6月11日 09:47</span>
+DF.prettyDate(dd, <span class="pl-s"><span class="pl-pds">'</span>US<span class="pl-pds">'</span></span>); <span class="pl-c">// 11/6 09:47</span>
+DF.prettyDate(dd, <span class="pl-s"><span class="pl-pds">'</span>GB<span class="pl-pds">'</span></span>); <span class="pl-c">// 3月3日 09:47</span>
+DF.prettyDate(dd, <span class="pl-s"><span class="pl-pds">'</span>US<span class="pl-pds">'</span></span>); <span class="pl-c">// 3/3 09:47</span>
+DF.prettyDate(dd, <span class="pl-s"><span class="pl-pds">'</span>GB<span class="pl-pds">'</span></span>); <span class="pl-c">// 2012年8月3日 09:47</span>
+DF.prettyDate(dd, <span class="pl-s"><span class="pl-pds">'</span>US<span class="pl-pds">'</span></span>); <span class="pl-c">// 3/8/2012 09:47</span>
+DF.prettyDate(dd, <span class="pl-s"><span class="pl-pds">'</span>GB<span class="pl-pds">'</span></span>); <span class="pl-c">// 2010年8月3日 09:47</span>
+DF.prettyDate(dd, <span class="pl-s"><span class="pl-pds">'</span>US<span class="pl-pds">'</span></span>); <span class="pl-c">// 3/8/2010 09:47</span></pre></div>
+
+<p>此外还有：<em><code>mix</code> <code>type</code> <code>now</code> <code>getQR</code> <code>parse</code> <code>pad</code> <code>convertTo12Hour</code> <code>convertTo24Hour</code>  <code>parseToInt</code></em>等方法，具体可参见源代码</p>
+
+<h4>
+<a id="2dateformat原型方法" class="anchor" href="#2dateformat%E5%8E%9F%E5%9E%8B%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>2、DateFormat原型方法</h4>
+
+<div class="highlight highlight-js"><pre>df.toFormattedString(<span class="pl-s"><span class="pl-pds">'</span>dd.MM.yyyy. HH:mm:ss.zzz<span class="pl-pds">'</span></span>); <span class="pl-c">// 31.07.2013. 10:50:27.864</span>
+df.toFormattedString(<span class="pl-s"><span class="pl-pds">'</span>dd.MM.yyyy. HH:mm:ss.z<span class="pl-pds">'</span></span>); <span class="pl-c">// 31.07.2013. 10:50:27.864</span>
+df.toFormattedString(<span class="pl-s"><span class="pl-pds">'</span>yyyy年M月dd日 HH:mm:ss.zzz<span class="pl-pds">'</span></span>); <span class="pl-c">// 2013年7月31日 10:50:27.864</span>
+df.toFormattedString(<span class="pl-s"><span class="pl-pds">'</span>yyyy年MM月dd日 HH:mm:ss.zzz<span class="pl-pds">'</span></span>); <span class="pl-c">// 2013年07月31日 10:50:27.864</span>
+df.toFormattedString(<span class="pl-s"><span class="pl-pds">'</span>yyyy年MMM%dd日 HH:mm:ss.zzz<span class="pl-pds">'</span></span>); <span class="pl-c">// 2013年7月31日 10:50:27.864</span>
+df.fromFormattedString(<span class="pl-s"><span class="pl-pds">'</span>2013年7月29日 2:50:06.570pm<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>yyyy年M月dd日 h:mm:ss.zzz%a<span class="pl-pds">'</span></span>); <span class="pl-c">// Mon Jul 29 2013 14:50:06 GMT+0800 (中国标准时间)</span>
+df.fromFormattedString(<span class="pl-s"><span class="pl-pds">'</span>2013年7月29日 2:50:06.570am<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>yyyy年M月dd日 h:mm:ss.zzz%ap<span class="pl-pds">'</span></span>); <span class="pl-c">// Mon Jul 29 2013 02:50:06 GMT+0800 (中国标准时间)</span>
+<span class="pl-c">// 原型上的prettyDate方法和静态方法prettyDate基本一样.此处省略.</span></pre></div>
+
+<p>此外还有：<em><code>setdate</code> <code>getQR</code></em>等方法，具体可参见源代码</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/dolymood/DateFormat">Dateformat</a> is maintained by <a href="https://github.com/dolymood">dolymood</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
+
